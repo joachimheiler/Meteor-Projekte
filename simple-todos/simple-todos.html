@@ -1,0 +1,63 @@
+<head>
+    <title>Projekt Mutti</title>
+</head>
+
+<body>
+<div class="container">
+    <header>
+
+
+        {{> loginButtons}}
+
+
+        <h1>Todo Liste für die Family rund um Mutti</h1>
+        {{#emoji}}:smile:, not :cry:{{/emoji}}
+
+        <label class="hide-completed">
+            <input type="checkbox" checked="{{hideCompleted}}" />
+            Erledigte Tasks ausblenden ({{incompleteCount}} Tasks offen)
+        </label>
+
+        {{#if currentUser}}
+            <form class="new-task">
+                <input type="text" name="text" placeholder="Gebe hier eine neue Aufgabe ein" />
+            </form>
+        {{/if}}
+
+    </header>
+
+    <ul>
+        {{#each tasks}}
+            {{> task}}
+        {{/each}}
+    </ul>
+
+</div>
+</body>
+
+    <template name="task">
+        <li class="{{#if checked}}checked{{/if}}">
+            <button class="delete">&times;</button>
+
+            <table float="left" padding=0 cellpadding="0" cellspacing="0">
+                <tr><td>
+                <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+                <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+         </td> </tr>
+                    <span class="datetimeInList">
+                <tr>
+
+                <td> {{createdAt.toLocaleDateString}} | {{createdAt.toLocaleTimeString}}</td>
+                    <td> changed: {{changedAt.toLocaleDateString}} | {{changedAt.toLocaleTimeString}}</td>
+
+                </tr> </span>
+            </table>
+
+        </li>
+    </template>
+
+
+
+
+
+
